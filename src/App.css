@@ -1,7 +1,54 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    padding: 1rem;
+}
 .btn-like {
     background: none;
     border: none;
 }
+.like-icon {
+    width: 2rem;
+}
 .like {
-    color: pink;
+    fill: palevioletred;
+}
+
+.attractions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.attraction-grid {
+    min-width: 24rem;
+    max-width: 24rem;
+    /* min-height: auto; */
+    line-height: 2rem;
+    border: 1px black solid;
+    border-radius: 2rem;
+    overflow: hidden;
+}
+.attractions-row {
+    display: grid;
+    row-gap: 2rem;
+}
+.attraction-row {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    gap: 2rem;
+}
+.attraction-row-img {
+    width: 28rem;
+    grid-column: 1;
+}
+.attraction-row-details {
+    align-self: center;
+    grid-column: 2;
 }

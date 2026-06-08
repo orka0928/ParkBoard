@@ -4,11 +4,18 @@ import SearchBox from "./SearchBox.jsx";
 import AttractionsBox from "./AttractionsBox.jsx";
 
 function App() {
-    const [togglePark, setTogglePark] = useState(false);
+    const [park, setPark] = useState("All");
+    const [searchWord, setSearchWord] = useState("");
+    const [displayMode, setDisplayMode] = useState("grid");
+
     return (
         <div className="App">
-            <SearchBox setTogglePark={setTogglePark} />
-            <AttractionsBox togglePark={togglePark} />
+            <SearchBox
+                setDisplayMode={setDisplayMode}
+                setSearchWord={setSearchWord}
+                setPark={setPark}
+            />
+            <AttractionsBox park={park} displayMode={displayMode} searchWord={searchWord} />
         </div>
     );
 }
