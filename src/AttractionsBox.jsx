@@ -151,6 +151,17 @@ const attractionsArr = [
 ];
 
 const AttractionsBox = function ({ park, displayMode, searchWord }) {
+    const [attractions, setAttractions] = useState(attractionsArr);
+    let _attracitons;
+    if (searchWord) {
+        _attracitons = attractions.filter((attraction) => attraction.name === searchWord);
+    } else if (park === "All") {
+        _attracitons = [...attractions];
+    } else {
+        _attracitons = attractions.filter(
+            (attraction) => attraction.park === `Tokyo Disney ${park}`,
+        );
+    }
     const handleLike = function (id) {
         setAttractions((attractions) =>
             attractions.map((attraction) =>
@@ -158,41 +169,18 @@ const AttractionsBox = function ({ park, displayMode, searchWord }) {
             ),
         );
     };
-    const [attractions, setAttractions] = useState(attractionsArr);
 
     return (
-        <div className={`attractions-${displayMode}`}>
-            {searchWord
-                ? attractions
-                      .filter((attraction) => attraction.name === searchWord)
-                      .map((attraction) => (
-                          <AttractionCard
-                              attraction={attraction}
-                              key={attraction.id}
-                              displayMode={displayMode}
-                              onHandleLike={handleLike}
-                          />
-                      ))
-                : park === "All"
-                  ? attractions.map((attraction) => (
-                        <AttractionCard
-                            attraction={attraction}
-                            key={attraction.id}
-                            displayMode={displayMode}
-                            onHandleLike={handleLike}
-                        />
-                    ))
-                  : attractions
-                        .filter((attraction) => attraction.park === `Tokyo Disney ${park}`)
-                        .map((attraction) => (
-                            <AttractionCard
-                                attraction={attraction}
-                                key={attraction.id}
-                                displayMode={displayMode}
-                                onHandleLike={handleLike}
-                            />
-                        ))}
-        </div>
+        <main className={`main attractions-${displayMode}`}>
+            {_attracitons.map((attraction) => (
+                <AttractionCard
+                    attraction={attraction}
+                    key={attraction.id}
+                    displayMode={displayMode}
+                    onHandleLike={handleLike}
+                />
+            ))}
+        </main>
     );
 };
 
