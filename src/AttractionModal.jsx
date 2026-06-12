@@ -1,4 +1,15 @@
+import { useState } from "react";
 const AttractionModal = function ({ attraction }) {
+    const [attractionData, setAttractionData] = useState({
+        name: attraction.name,
+        park: attraction.park,
+        area: attraction.area,
+        type: attraction.type,
+        description: attraction.description,
+        review: attraction.review,
+    });
+    const [editComp, setEditComp] = useState("");
+
     return (
         <div className="attraction-modal">
             <figure>
@@ -9,12 +20,65 @@ const AttractionModal = function ({ attraction }) {
                 />
             </figure>
             <div>
-                <h3>{attraction.name}</h3>
-                <p>{attraction.park}</p>
-                <p>{attraction.area} </p>
-                <p>{attraction.type}</p>
-                <h4>{attraction.description}</h4>
-                <h5>{attraction.review}</h5>
+                <h3>
+                    {editComp === "name" ? (
+                        <ToggleFormButton value={attractionData.name} setEditComp={setEditComp} />
+                    ) : (
+                        <>
+                            <Text
+                                value1={attraction.name}
+                                value2={"name"}
+                                setEditComp={setEditComp}
+                            />
+                        </>
+                    )}
+                </h3>
+                <p>
+                    {editComp === "park" ? (
+                        <ToggleFormButton value={attractionData.park} setEditComp={setEditComp} />
+                    ) : (
+                        <Text value1={attraction.park} value2={"park"} setEditComp={setEditComp} />
+                    )}
+                </p>
+                <p>
+                    {editComp === "area" ? (
+                        <ToggleFormButton value={attractionData.area} setEditComp={setEditComp} />
+                    ) : (
+                        <Text value1={attraction.area} value2={"area"} setEditComp={setEditComp} />
+                    )}
+                </p>
+                <p>
+                    {editComp === "type" ? (
+                        <ToggleFormButton value={attractionData.type} setEditComp={setEditComp} />
+                    ) : (
+                        <Text value1={attraction.type} value2={"type"} setEditComp={setEditComp} />
+                    )}
+                </p>
+                <h4>
+                    {editComp === "description" ? (
+                        <ToggleFormButton
+                            value={attractionData.description}
+                            setEditComp={setEditComp}
+                        />
+                    ) : (
+                        <Text
+                            value1={attraction.description}
+                            value2={"description"}
+                            setEditComp={setEditComp}
+                        />
+                    )}
+                </h4>
+                <h5>
+                    {editComp === "review" ? (
+                        <ToggleFormButton value={attractionData.review} setEditComp={setEditComp} />
+                    ) : (
+                        <Text
+                            value1={attraction.review}
+                            value2={"review"}
+                            setEditComp={setEditComp}
+                        />
+                    )}
+                </h5>
                 <button type="button" className={`btn-like ${attraction.like ? "like" : ""}`}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -27,6 +91,29 @@ const AttractionModal = function ({ attraction }) {
                 </button>
             </div>
         </div>
+    );
+};
+
+const ToggleFormButton = function ({ value, setEditComp }) {
+    return (
+        <>
+            <input type="input" value={value}></input>
+            <button type="button" onClick={() => setEditComp("")}>
+                キャンセル
+            </button>
+            <button type="button" onClick={() => setEditComp("")}>
+                更新
+            </button>
+        </>
+    );
+};
+
+const Text = function ({ value1, value2, setEditComp }) {
+    return (
+        <>
+            {value1}
+            <button onClick={() => setEditComp(value2)}>&#9999;&#65039;</button>
+        </>
     );
 };
 
