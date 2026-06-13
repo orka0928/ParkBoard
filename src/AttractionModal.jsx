@@ -1,4 +1,27 @@
 import { useState } from "react";
+
+const areas = {
+    "Tokyo Disney Land": [
+        "World Bazaar",
+        "Adventureland",
+        "Westernland",
+        "Critter Country",
+        "Fantasyland",
+        "Toontown",
+        "Tomorrowland",
+    ],
+    "Tokyo Disney Sea": [
+        "Mediterranean Harbor",
+        "American Waterfront",
+        "Port Discovery",
+        "Lost River Delta",
+        "Fantasy Springs",
+        "Arabian Coast",
+        "Mermaid Lagoon",
+        "Mysterious Island",
+    ],
+};
+
 const AttractionModal = function ({ attraction }) {
     const [attractionData, setAttractionData] = useState({
         name: attraction.name,
@@ -19,7 +42,7 @@ const AttractionModal = function ({ attraction }) {
                     // className="attraction-img"
                 />
             </figure>
-            <div>
+            <div className="attraction-details">
                 <h3>
                     {editComp === "name" ? (
                         <ToggleFormButton value={attractionData.name} setEditComp={setEditComp} />
@@ -35,18 +58,51 @@ const AttractionModal = function ({ attraction }) {
                 </h3>
                 <p>
                     {editComp === "park" ? (
-                        <ToggleFormButton value={attractionData.park} setEditComp={setEditComp} />
+                        // <ToggleFormButton value={attractionData.park} setEditComp={setEditComp} />
+                        <>
+                            <select
+                                value={attractionData.park}
+                                onChange={(e) =>
+                                    setAttractionData((_attraction) => ({
+                                        ...attraction,
+                                        park: e.target.value,
+                                    }))
+                                }
+                            >
+                                <option>Tokyo Disney Land</option>
+                                <option>Tokyo Disney Sea</option>
+                            </select>
+                        </>
                     ) : (
                         <Text value1={attraction.park} value2={"park"} setEditComp={setEditComp} />
                     )}
                 </p>
-                <p>
-                    {editComp === "area" ? (
-                        <ToggleFormButton value={attractionData.area} setEditComp={setEditComp} />
-                    ) : (
-                        <Text value1={attraction.area} value2={"area"} setEditComp={setEditComp} />
-                    )}
-                </p>
+
+                {editComp === "area" ? (
+                    <>
+                        <select>
+                            <optgroup label="Tokyo Disney Land">
+                                {areas["Tokyo Disney Land"].map((area) => (
+                                    <option value={area}>{area}</option>
+                                ))}
+                            </optgroup>
+                            <optgroup label="Tokyo Disney Sea">
+                                {areas["Tokyo Disney Sea"].map((area) => (
+                                    <option value={area}>{area}</option>
+                                ))}
+                            </optgroup>
+                        </select>
+                        <button type="button" onClick={() => setEditComp("")}>
+                            キャンセル
+                        </button>
+                        <button type="button" onClick={() => setEditComp("")}>
+                            更新
+                        </button>
+                    </>
+                ) : (
+                    <Text value1={attraction.area} value2={"area"} setEditComp={setEditComp} />
+                )}
+
                 <p>
                     {editComp === "type" ? (
                         <ToggleFormButton value={attractionData.type} setEditComp={setEditComp} />
@@ -56,16 +112,32 @@ const AttractionModal = function ({ attraction }) {
                 </p>
                 <h4>
                     {editComp === "description" ? (
-                        <ToggleFormButton
-                            value={attractionData.description}
-                            setEditComp={setEditComp}
-                        />
+                        <>
+                            <textarea
+                                value={attractionData.description}
+                                onChange={(e) =>
+                                    setAttractionData((_attraction) => ({
+                                        ..._attraction,
+                                        description: e.target.value,
+                                    }))
+                                }
+                                className="description-textarea"
+                            ></textarea>
+                            <button type="button" onClick={() => setEditComp("")}>
+                                キャンセル
+                            </button>
+                            <button type="button" onClick={() => setEditComp("")}>
+                                更新
+                            </button>
+                        </>
                     ) : (
-                        <Text
-                            value1={attraction.description}
-                            value2={"description"}
-                            setEditComp={setEditComp}
-                        />
+                        <>
+                            <Text
+                                value1={attraction.description}
+                                value2={"description"}
+                                setEditComp={setEditComp}
+                            />
+                        </>
                     )}
                 </h4>
                 <h5>
@@ -94,7 +166,7 @@ const AttractionModal = function ({ attraction }) {
     );
 };
 
-const ToggleFormButton = function ({ value, setEditComp }) {
+const ToggleFormButton = function ({ value, setEditComp, setAttractionData }) {
     return (
         <>
             <input type="input" value={value}></input>
