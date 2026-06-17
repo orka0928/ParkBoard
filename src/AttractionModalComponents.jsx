@@ -88,21 +88,7 @@ const Text = function ({ value1, value2, setEditComp }) {
         </>
     );
 };
-// const AttractionNameForm = function ({
-//     updateAttractionData,
-//     setEditComp,
-//     setUpdateAttractionData,
-// }) {
-//     return (
-//         <>
-//             <input type="input" defaultValue={updateAttractionData.name} />
-//             <UpdateAndDeleteBtn
-//                 setEditComp={setEditComp}
-//                 setUpdateAttractionData={setUpdateAttractionData}
-//             />
-//         </>
-//     );
-// };
+
 const UpdateParkForm = function ({ updateAttractionData, setEditComp, setUpdateAttractionData }) {
     return (
         <>
@@ -147,17 +133,7 @@ const UpdateAreaForm = function ({
         </>
     );
 };
-const UpdateTypeForm = function ({ updateAttractionData, setEditComp, setUpdateAttractionData }) {
-    return (
-        <>
-            <input type="input" value={updateAttractionData.type} />
-            <UpdateAndDeleteBtn
-                setEditComp={setEditComp}
-                setUpdateAttractionData={setUpdateAttractionData}
-            />
-        </>
-    );
-};
+
 const UpdateDescriptionForm = function ({
     updateAttractionData,
     setEditComp,
@@ -182,24 +158,11 @@ const UpdateDescriptionForm = function ({
         </>
     );
 };
-const UpdateReviewForm = function ({ updateAttractionData, setEditComp, setUpdateAttractionData }) {
-    return (
-        <>
-            <input type="input" value={updateAttractionData.review} />
-            <UpdateAndDeleteBtn
-                setEditComp={setEditComp}
-                setUpdateAttractionData={setUpdateAttractionData}
-            />
-        </>
-    );
-};
 export {
     // AttractionNameForm,
     UpdateAreaForm,
     UpdateParkForm,
-    UpdateTypeForm,
     UpdateDescriptionForm,
-    UpdateReviewForm,
     Text,
     InputUpdateComp,
 };
