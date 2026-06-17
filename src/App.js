@@ -4,7 +4,7 @@ import SearchBox from "./SearchBox.jsx";
 import AttractionsBox from "./AttractionsBox.jsx";
 import AttractionModal from "./AttractionModal.jsx";
 
-const attractionsArr = [
+const attractions = [
     {
         id: 1,
         img: "/img/center_of_the_earth.svg",
@@ -154,6 +154,7 @@ const attractionsArr = [
 ];
 
 function App() {
+    const [attractionsArr, setAttractionsArr] = useState(attractions);
     const [park, setPark] = useState("All");
     const [searchWord, setSearchWord] = useState("");
     const [displayMode, setDisplayMode] = useState("grid");
@@ -176,7 +177,9 @@ function App() {
                 setIsModalOpen={setIsModalOpen}
                 attractionsArr={attractionsArr}
             />
-            {isModalOpen && <AttractionModal attraction={choiceAttraction} />}
+            {isModalOpen && (
+                <AttractionModal attraction={choiceAttraction} setAttractions={setAttractionsArr} />
+            )}
         </div>
     );
 }

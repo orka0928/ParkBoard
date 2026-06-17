@@ -24,8 +24,8 @@ const areas = {
     ],
 };
 
-const AttractionModal = function ({ attraction }) {
-    const [attractionData, setAttractionData] = useState({
+const AttractionModal = function ({ attraction, setAttractions }) {
+    const [updateAttractionData, setUpdateAttractionData] = useState({
         name: attraction.name,
         park: attraction.park,
         area: attraction.area,
@@ -40,11 +40,13 @@ const AttractionModal = function ({ attraction }) {
         <div className="attraction-modal">
             <AttractionModalImg attraction={attraction} />
             <UpdateAttractionForm
+                originalData={attraction}
                 areas={areas}
-                attractionData={attractionData}
+                updateAttractionData={updateAttractionData}
                 editComp={editComp}
                 setEditComp={setEditComp}
-                setAttractionData={setAttractionData}
+                setAttractions={setAttractions}
+                setUpdateAttractionData={setUpdateAttractionData}
             />
         </div>
     );
