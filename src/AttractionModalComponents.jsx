@@ -1,4 +1,4 @@
-const UpdateAndDeleteBtn = function ({
+const UpdateAndCancelBtn = function ({
     objKey,
     originalData,
     updateAttractionData,
@@ -31,55 +31,6 @@ const UpdateAndDeleteBtn = function ({
     );
 };
 
-const InputForm = function ({
-    objKey,
-    updateAttractionData,
-    setUpdateAttractionData,
-    originalData,
-}) {
-    return (
-        <input
-            type="input"
-            defaultValue={updateAttractionData}
-            placeholder={originalData}
-            onChange={(e) =>
-                setUpdateAttractionData((_attraction) => ({
-                    ..._attraction,
-                    [objKey]: e.target.value,
-                }))
-            }
-        />
-    );
-};
-const InputUpdateComp = function ({
-    objKey,
-    originalData,
-    updateAttractionData,
-    setEditComp,
-    setUpdateAttractionData,
-    setAttractions,
-    id,
-}) {
-    return (
-        <>
-            <InputForm
-                updateAttractionData={updateAttractionData}
-                originalData={originalData}
-                objKey={objKey}
-                setUpdateAttractionData={setUpdateAttractionData}
-            />
-            <UpdateAndDeleteBtn
-                objKey={objKey}
-                setEditComp={setEditComp}
-                originalData={originalData}
-                id={id}
-                updateAttractionData={updateAttractionData}
-                setUpdateAttractionData={setUpdateAttractionData}
-                setAttractions={setAttractions}
-            />
-        </>
-    );
-};
 const Text = function ({ value1, value2, setEditComp }) {
     return (
         <>
@@ -89,80 +40,128 @@ const Text = function ({ value1, value2, setEditComp }) {
     );
 };
 
-const UpdateParkForm = function ({ updateAttractionData, setEditComp, setUpdateAttractionData }) {
+const UpdateInput = function ({
+    objKey,
+    updateAttractionData,
+    setUpdateAttractionData,
+    originalData,
+}) {
+    return (
+        <input
+            type="input"
+            defaultValue={updateAttractionData}
+            placeholder={originalData[objKey]}
+            onChange={(e) =>
+                setUpdateAttractionData((_attraction) => ({
+                    ..._attraction,
+                    [objKey]: e.target.value,
+                }))
+            }
+        />
+    );
+};
+
+const UpdatePark = function ({ parks }) {
+    return (
+        <select defaultValue={parks}>
+            <option>Tokyo Disney Land</option>
+            <option>Tokyo Disney Sea</option>
+        </select>
+    );
+};
+
+const UpdateArea = function ({ areas, updateAttractionData, setUpdateAttractionData }) {
+    return (
+        <select
+            defaultValue={updateAttractionData.area}
+            onChange={(e) =>
+                setUpdateAttractionData((_attraction) => ({
+                    ..._attraction,
+                    area: e.target.value,
+                }))
+            }
+        >
+            <optgroup label={updateAttractionData.park}>
+                {areas[updateAttractionData.park].map((area) => (
+                    <option value={area}>{area}</option>
+                ))}
+            </optgroup>
+        </select>
+    );
+};
+const UpdateDescription = function ({ description, setUpdateAttractionData }) {
+    return (
+        <textarea
+            defaultValue={description}
+            onChange={(e) =>
+                setUpdateAttractionData((_attraction) => ({
+                    ..._attraction,
+                    description: e.target.value,
+                }))
+            }
+            className="description-textarea"
+        ></textarea>
+    );
+};
+
+const UpdateInputForm = function ({
+    editComp,
+    originalData,
+    updateAttractionData,
+    setEditComp,
+    setUpdateAttractionData,
+    setAttractions,
+}) {
     return (
         <>
-            <select value={updateAttractionData.park}>
-                <option>Tokyo Disney Land</option>
-                <option>Tokyo Disney Sea</option>
-            </select>
-            <UpdateAndDeleteBtn
-                setEditComp={setEditComp}
+            <UpdateInput
+                objKey={editComp}
+                originalData={originalData}
+                updateAttractionData={updateAttractionData[editComp]}
                 setUpdateAttractionData={setUpdateAttractionData}
+            />
+            <UpdateAndCancelBtn
+                objKey={editComp}
+                setEditComp={setEditComp}
+                id={originalData.id}
+                originalData={originalData[editComp]}
+                updateAttractionData={updateAttractionData[editComp]}
+                setUpdateAttractionData={setUpdateAttractionData}
+                setAttractions={setAttractions}
             />
         </>
     );
 };
-const UpdateAreaForm = function ({
-    areas,
+const UpdateForm = function ({
+    objKey,
+    originalData,
     updateAttractionData,
     setEditComp,
     setUpdateAttractionData,
+    setAttractions,
+    children,
 }) {
     return (
         <>
-            <select
-                value={updateAttractionData.area}
-                onChange={(e) =>
-                    setUpdateAttractionData((_attraction) => ({
-                        ..._attraction,
-                        area: e.target.value,
-                    }))
-                }
-            >
-                <optgroup label={updateAttractionData.park}>
-                    {areas[updateAttractionData.park].map((area) => (
-                        <option value={area}>{area}</option>
-                    ))}
-                </optgroup>
-            </select>
-            <UpdateAndDeleteBtn
+            {children}
+            <UpdateAndCancelBtn
+                objKey={objKey}
                 setEditComp={setEditComp}
+                id={originalData.id}
+                originalData={originalData[objKey]}
+                updateAttractionData={updateAttractionData[objKey]}
                 setUpdateAttractionData={setUpdateAttractionData}
-            />
-        </>
-    );
-};
-
-const UpdateDescriptionForm = function ({
-    updateAttractionData,
-    setEditComp,
-    setUpdateAttractionData,
-}) {
-    return (
-        <>
-            <textarea
-                value={updateAttractionData.description}
-                // onChange={(e) =>
-                //     setUpdateAttractionData((_attraction) => ({
-                //         ..._attraction,
-                //         description: e.target.value,
-                //     }))
-
-                className="description-textarea"
-            ></textarea>
-            <UpdateAndDeleteBtn
-                setEditComp={setEditComp}
-                setUpdateAttractionData={setUpdateAttractionData}
+                setAttractions={setAttractions}
             />
         </>
     );
 };
 export {
-    // AttractionNameForm,
-    UpdateAreaForm,
-    UpdateParkForm,
-    UpdateDescriptionForm,
+    UpdateArea,
+    UpdatePark,
+    UpdateDescription,
+    UpdateAndCancelBtn,
     Text,
-    InputUpdateComp,
+    UpdateInputForm,
+    UpdateForm,
 };
