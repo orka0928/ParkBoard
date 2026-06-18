@@ -1,4 +1,13 @@
-import * as Comp from "./AttractionModalComponents";
+import {
+    UpdateAndCancelBtn,
+    UpdateForm,
+    UpdateArea,
+    UpdatePark,
+    UpdateDescription,
+    UpdateInput,
+    UpdateInputForm,
+    Text,
+} from "./AttractionModalComponents";
 const UpdateAttractionForm = function ({
     areas,
     originalData,
@@ -13,16 +22,18 @@ const UpdateAttractionForm = function ({
         <div className="attraction-details">
             <h3>
                 {editComp === "name" ? (
-                    <Comp.UpdateInputComp
-                        objKey={"name"}
-                        originalData={originalData.name}
-                        updateAttractionData={updateAttractionData.name}
-                        setEditComp={setEditComp}
-                        setUpdateAttractionData={setUpdateAttractionData}
-                        setAttractions={setAttractions}
-                    />
+                    <>
+                        <UpdateInputForm
+                            editComp={editComp}
+                            originalData={originalData}
+                            updateAttractionData={updateAttractionData}
+                            setUpdateAttractionData={setUpdateAttractionData}
+                            setAttractions={setAttractions}
+                            setEditComp={setEditComp}
+                        />
+                    </>
                 ) : (
-                    <Comp.Text
+                    <Text
                         value1={updateAttractionData.name}
                         value2={"name"}
                         setEditComp={setEditComp}
@@ -31,13 +42,20 @@ const UpdateAttractionForm = function ({
             </h3>
             <h4>
                 {editComp === "park" ? (
-                    <Comp.UpdateParkForm
-                        updateAttractionData={updateAttractionData}
-                        setEditComp={setEditComp}
-                        setUpdateAttractionData={setUpdateAttractionData}
-                    />
+                    <>
+                        <UpdateForm
+                            editComp={editComp}
+                            setEditComp={setEditComp}
+                            originalData={originalData}
+                            updateAttractionData={updateAttractionData}
+                            setUpdateAttractionData={setUpdateAttractionData}
+                            setAttractions={setAttractions}
+                        >
+                            <UpdatePark parks={updateAttractionData[editComp]} />
+                        </UpdateForm>
+                    </>
                 ) : (
-                    <Comp.Text
+                    <Text
                         value1={updateAttractionData.park}
                         value2={"park"}
                         setEditComp={setEditComp}
@@ -46,14 +64,24 @@ const UpdateAttractionForm = function ({
             </h4>
             <h5>
                 {editComp === "area" ? (
-                    <Comp.UpdateAreaForm
-                        areas={areas}
-                        updateAttractionData={updateAttractionData}
-                        setEditComp={setEditComp}
-                        setUpdateAttractionData={setUpdateAttractionData}
-                    />
+                    <>
+                        <UpdateForm
+                            editComp={editComp}
+                            setEditComp={setEditComp}
+                            originalData={originalData}
+                            updateAttractionData={updateAttractionData}
+                            setUpdateAttractionData={setUpdateAttractionData}
+                            setAttractions={setAttractions}
+                        >
+                            <UpdateArea
+                                areas={areas}
+                                updateAttractionData={updateAttractionData}
+                                setUpdateAttractionData={setUpdateAttractionData}
+                            />
+                        </UpdateForm>
+                    </>
                 ) : (
-                    <Comp.Text
+                    <Text
                         value1={updateAttractionData.area}
                         value2={"area"}
                         setEditComp={setEditComp}
@@ -62,15 +90,16 @@ const UpdateAttractionForm = function ({
             </h5>
             <p>
                 {editComp === "type" ? (
-                    <Comp.UpdateInputComp
-                        updateAttractionData={updateAttractionData.type}
-                        originalData={originalData.type}
+                    <UpdateInputForm
+                        editComp={editComp}
                         setEditComp={setEditComp}
+                        originalData={originalData}
+                        updateAttractionData={updateAttractionData}
                         setUpdateAttractionData={setUpdateAttractionData}
                         setAttractions={setAttractions}
                     />
                 ) : (
-                    <Comp.Text
+                    <Text
                         value1={updateAttractionData.type}
                         value2={"type"}
                         setEditComp={setEditComp}
@@ -79,14 +108,24 @@ const UpdateAttractionForm = function ({
             </p>
             <p>
                 {editComp === "description" ? (
-                    <Comp.UpdateDescriptionForm
-                        updateAttractionData={updateAttractionData}
-                        setEditComp={setEditComp}
-                        setUpdateAttractionData={setUpdateAttractionData}
-                    />
+                    <>
+                        <UpdateForm
+                            editComp={editComp}
+                            setEditComp={setEditComp}
+                            originalData={originalData}
+                            updateAttractionData={updateAttractionData}
+                            setUpdateAttractionData={setUpdateAttractionData}
+                            setAttractions={setAttractions}
+                        >
+                            <UpdateDescription
+                                description={updateAttractionData[editComp]}
+                                setUpdateAttractionData={setUpdateAttractionData}
+                            />
+                        </UpdateForm>
+                    </>
                 ) : (
                     <>
-                        <Comp.Text
+                        <Text
                             value1={updateAttractionData.description}
                             value2={"description"}
                             setEditComp={setEditComp}
@@ -96,16 +135,16 @@ const UpdateAttractionForm = function ({
             </p>
             <p>
                 {editComp === "review" ? (
-                    <Comp.UpdateInputComp
-                        updateAttractionData={updateAttractionData.review}
-                        originalData={originalData.review}
-                        objKey={"review"}
+                    <UpdateInputForm
+                        editComp={editComp}
                         setEditComp={setEditComp}
+                        originalData={originalData}
+                        updateAttractionData={updateAttractionData}
                         setUpdateAttractionData={setUpdateAttractionData}
                         setAttractions={setAttractions}
                     />
                 ) : (
-                    <Comp.Text
+                    <Text
                         value1={updateAttractionData.review}
                         value2={"review"}
                         setEditComp={setEditComp}
