@@ -161,6 +161,15 @@ function App() {
     const [attractionId, setAttractionId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const choiceAttraction = attractionsArr.find((attraction) => attraction.id === attractionId);
+    const handleDelete = function (id) {
+        const valid = window.confirm("本当に削除しますか？");
+        if (!valid) return;
+        setAttractionsArr((attractions) =>
+            attractions.filter((attraction) => attraction.id !== id),
+        );
+
+        setIsModalOpen(false);
+    };
 
     return (
         <div className="App">
@@ -173,12 +182,18 @@ function App() {
                 park={park}
                 displayMode={displayMode}
                 searchWord={searchWord}
+                setAttractions={setAttractionsArr}
                 setAttractionId={setAttractionId}
                 setIsModalOpen={setIsModalOpen}
                 attractionsArr={attractionsArr}
+                onHandleDelete={handleDelete}
             />
-            {isModalOpen && (
-                <AttractionModal attraction={choiceAttraction} setAttractions={setAttractionsArr} />
+            {isModalOpen && choiceAttraction && (
+                <AttractionModal
+                    attraction={choiceAttraction}
+                    setAttractions={setAttractionsArr}
+                    onHandleDelete={handleDelete}
+                />
             )}
         </div>
     );
