@@ -24,29 +24,16 @@ const areas = {
     ],
 };
 
-const AttractionModal = function ({ attraction, setAttractions }) {
-    const [updateAttractionData, setUpdateAttractionData] = useState({
-        name: attraction.name,
-        park: attraction.park,
-        area: attraction.area,
-        type: attraction.type,
-        description: attraction.description,
-        review: attraction.review,
-        like: attraction.like,
-    });
-    const [editComp, setEditComp] = useState("");
-
+const AttractionModal = function ({ attraction, setAttractions, onHandleDelete, onHandleLike }) {
     return (
         <div className="attraction-modal">
             <AttractionModalImg attraction={attraction} />
             <UpdateAttractionForm
                 originalData={attraction}
                 areas={areas}
-                updateAttractionData={updateAttractionData}
-                editComp={editComp}
-                setEditComp={setEditComp}
                 setAttractions={setAttractions}
-                setUpdateAttractionData={setUpdateAttractionData}
+                onHandleDelete={onHandleDelete}
+                onHandleLike={onHandleLike}
             />
         </div>
     );

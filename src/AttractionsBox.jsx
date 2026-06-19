@@ -1,21 +1,20 @@
 import AttractionCard from "./Card";
 
-import { useState } from "react";
-
 const AttractionsBox = function ({
-    attractionsArr,
+    attractions,
     park,
     displayMode,
     searchWord,
     setAttractionId,
     setIsModalOpen,
+    setAttractions,
+    onHandleDelete,
 }) {
-    const [attractions, setAttractions] = useState(attractionsArr);
     let _attractions;
     if (searchWord) {
         _attractions = attractions.filter((attraction) => attraction.name === searchWord);
     } else if (park === "All") {
-        _attractions = [...attractions];
+        _attractions = attractions;
     } else {
         _attractions = attractions.filter(
             (attraction) => attraction.park === `Tokyo Disney ${park}`,
@@ -39,6 +38,8 @@ const AttractionsBox = function ({
                     onHandleLike={handleLike}
                     setAttractionId={setAttractionId}
                     setIsModalOpen={setIsModalOpen}
+                    setAttractions={setAttractions}
+                    onHandleDelete={onHandleDelete}
                 />
             ))}
         </main>

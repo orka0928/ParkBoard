@@ -4,7 +4,7 @@ import SearchBox from "./SearchBox.jsx";
 import AttractionsBox from "./AttractionsBox.jsx";
 import AttractionModal from "./AttractionModal.jsx";
 
-const attractions = [
+const attractionsArr = [
     {
         id: 1,
         img: "/img/center_of_the_earth.svg",
@@ -154,7 +154,7 @@ const attractions = [
 ];
 
 function App() {
-    const [attractionsArr, setAttractionsArr] = useState(attractions);
+    const [attractions, setAttractions] = useState(attractionsArr);
     const [park, setPark] = useState("All");
     const [searchWord, setSearchWord] = useState("");
     const [displayMode, setDisplayMode] = useState("grid");
@@ -164,11 +164,16 @@ function App() {
     const handleDelete = function (id) {
         const valid = window.confirm("本当に削除しますか？");
         if (!valid) return;
-        setAttractionsArr((attractions) =>
-            attractions.filter((attraction) => attraction.id !== id),
-        );
+        setAttractions((attractions) => attractions.filter((attraction) => attraction.id !== id));
 
         setIsModalOpen(false);
+    };
+    const handleLike = function (id) {
+        setAttractions((attractions) =>
+            attractions.map((attraction) =>
+                attraction.id === id ? { ...attraction, like: !attraction.like } : attraction,
+            ),
+        );
     };
 
     return (
@@ -182,17 +187,19 @@ function App() {
                 park={park}
                 displayMode={displayMode}
                 searchWord={searchWord}
-                setAttractions={setAttractionsArr}
+                setAttractions={setAttractions}
                 setAttractionId={setAttractionId}
                 setIsModalOpen={setIsModalOpen}
-                attractionsArr={attractionsArr}
+                attractions={attractions}
                 onHandleDelete={handleDelete}
+                onHandleLike={handleLike}
             />
             {isModalOpen && choiceAttraction && (
                 <AttractionModal
                     attraction={choiceAttraction}
-                    setAttractions={setAttractionsArr}
+                    setAttractions={setAttractions}
                     onHandleDelete={handleDelete}
+                    onHandleLike={handleLike}
                 />
             )}
         </div>
