@@ -2,21 +2,23 @@ import { useState } from "react";
 const AddModal = function ({ areas, setAttractions }) {
     const [newAttraction, setNewAttraction] = useState({
         id: 1,
-        newName: "",
-        newPark: "",
-        newArea: "",
-        newType: "",
-        newDescription: "",
-        newReview: "",
-        newLike: false,
+
+        name: "",
+        park: "",
+        area: "",
+        type: "",
+        description: "",
+        review: "",
+        like: false,
     });
+
     return (
         <div className="add-modal">
             <NewAttractionIMG />
             <NewAttractionInput
                 value={"name"}
                 label={"アトラクション名"}
-                objKey={"newName"}
+                objKey={"name"}
                 setNewAttraction={setNewAttraction}
             />
             <NewAttractionPark setNewAttraction={setNewAttraction} />
@@ -28,7 +30,7 @@ const AddModal = function ({ areas, setAttractions }) {
             <NewAttractionInput
                 value={"type"}
                 label={"アトラクション種類"}
-                objKey={"newType"}
+                objKey={"type"}
                 setNewAttraction={setNewAttraction}
             />
             <NewAttractionDescription
@@ -39,7 +41,7 @@ const AddModal = function ({ areas, setAttractions }) {
             <NewAttractionInput
                 value={"review"}
                 label={"感想"}
-                objKey={"newReview"}
+                objKey={"review"}
                 setNewAttraction={setNewAttraction}
             />
             <NewAttractionFavBtns setNewAttraction={setNewAttraction} />
@@ -80,7 +82,7 @@ const NewAttractionPark = function ({ setNewAttraction }) {
             <label for="newattraction-name">パーク</label>
             <select
                 onChange={(e) =>
-                    setNewAttraction((attraction) => ({ ...attraction, newPark: e.target.value }))
+                    setNewAttraction((attraction) => ({ ...attraction, park: e.target.value }))
                 }
             >
                 <option>Tokyo Disney Land</option>
@@ -97,7 +99,7 @@ const NewAttractionArea = function ({ areas, newAttraction, setNewAttraction }) 
             <label for="newattraction-area">エリア</label>
             <select
                 onChange={(e) =>
-                    setNewAttraction((attraction) => ({ ...attraction, newArea: e.target.value }))
+                    setNewAttraction((attraction) => ({ ...attraction, area: e.target.value }))
                 }
             >
                 {areasArray.map((park) => (
@@ -120,7 +122,7 @@ const NewAttractionDescription = function ({ setNewAttraction }) {
                 onChange={(e) =>
                     setNewAttraction((attraction) => ({
                         ...attraction,
-                        newDescription: e.target.value,
+                        description: e.target.value,
                     }))
                 }
             ></textarea>
@@ -128,23 +130,26 @@ const NewAttractionDescription = function ({ setNewAttraction }) {
     );
 };
 const NewAttractionFavBtns = function ({ setNewAttraction }) {
+    const [registerLike, setRegisterLike] = useState(false);
+    const handleRegisterLike = function (boolean) {
+        setRegisterLike(boolean);
+        setNewAttraction((attraction) => ({ ...attraction, like: boolean }));
+    };
     return (
         <>
             <label>お気に入り登録しますか？</label>
             <div className="fav-btns">
                 <button
                     type="button"
-                    onClick={(e) =>
-                        setNewAttraction((attraction) => ({ ...attraction, newLike: true }))
-                    }
+                    className={`new-like-btn ${registerLike ? "new-like-btn-true" : ""}`}
+                    onClick={() => handleRegisterLike(true)}
                 >
                     YES
                 </button>
                 <button
                     type="button"
-                    onClick={(e) =>
-                        setNewAttraction((attraction) => ({ ...attraction, newLike: false }))
-                    }
+                    className={`new-like-btn ${!registerLike ? "new-like-btn-false" : ""}`}
+                    onClick={() => handleRegisterLike(false)}
                 >
                     NO
                 </button>
