@@ -1,5 +1,5 @@
 import { useState } from "react";
-const AddModal = function ({ areas }) {
+const AddModal = function ({ areas, setAttractions }) {
     const [newAttraction, setNewAttraction] = useState({
         id: 1,
         newName: "",
@@ -13,13 +13,37 @@ const AddModal = function ({ areas }) {
     return (
         <div className="add-modal">
             <NewAttractionIMG />
-            <NewAttractionName setNewAttraction={setNewAttraction} />
+            <NewAttractionInput
+                value={"name"}
+                label={"アトラクション名"}
+                objKey={"newName"}
+                setNewAttraction={setNewAttraction}
+            />
             <NewAttractionPark setNewAttraction={setNewAttraction} />
             <NewAttractionArea
                 newAttraction={newAttraction}
                 setNewAttraction={setNewAttraction}
                 areas={areas}
             />
+            <NewAttractionInput
+                value={"type"}
+                label={"アトラクション種類"}
+                objKey={"newType"}
+                setNewAttraction={setNewAttraction}
+            />
+            <NewAttractionDescription
+                newAttraction={newAttraction}
+                setNewAttraction={setNewAttraction}
+                areas={areas}
+            />
+            <NewAttractionInput
+                value={"review"}
+                label={"感想"}
+                objKey={"newReview"}
+                setNewAttraction={setNewAttraction}
+            />
+            <NewAttractionFavBtns setNewAttraction={setNewAttraction} />
+            <NewCreateBtn newAttraction={newAttraction} setAttractions={setAttractions} />
         </div>
     );
 };
@@ -33,17 +57,17 @@ const NewAttractionIMG = function ({}) {
     );
 };
 
-const NewAttractionName = function ({ setNewAttraction }) {
+const NewAttractionInput = function ({ value, label, objKey, setNewAttraction }) {
     return (
         <>
-            <label for="newattraction-name">アトラクション名</label>
+            <label for={`newattraction-${value}`}>{label}</label>
             <input
                 type="input"
-                id="newattraction-name"
+                id={`newattraction-${value}`}
                 onChange={(e) =>
                     setNewAttraction((attraction) => ({
                         ...attraction,
-                        newName: e.target.value,
+                        [objKey]: e.target.value,
                     }))
                 }
             ></input>
@@ -65,13 +89,17 @@ const NewAttractionPark = function ({ setNewAttraction }) {
         </>
     );
 };
-const NewAttractionArea = function ({ areas, newAttraction }) {
+const NewAttractionArea = function ({ areas, newAttraction, setNewAttraction }) {
     const areasArray = Object.entries(areas).map((key) => ({ [key[0]]: key[1] }));
-    console.log(Object.entries(areas).map((key) => ({ [key[0]]: key[1] })));
+
     return (
         <>
-            <label for="newattraction-name">エリア</label>
-            <select>
+            <label for="newattraction-area">エリア</label>
+            <select
+                onChange={(e) =>
+                    setNewAttraction((attraction) => ({ ...attraction, newArea: e.target.value }))
+                }
+            >
                 {areasArray.map((park) => (
                     <>
                         <optgroup label={Object.keys(park)}></optgroup>
@@ -82,6 +110,56 @@ const NewAttractionArea = function ({ areas, newAttraction }) {
                 ))}
             </select>
         </>
+    );
+};
+const NewAttractionDescription = function ({ setNewAttraction }) {
+    return (
+        <>
+            <label>アトラクション説明</label>
+            <textarea
+                onChange={(e) =>
+                    setNewAttraction((attraction) => ({
+                        ...attraction,
+                        newDescription: e.target.value,
+                    }))
+                }
+            ></textarea>
+        </>
+    );
+};
+const NewAttractionFavBtns = function ({ setNewAttraction }) {
+    return (
+        <>
+            <label>お気に入り登録しますか？</label>
+            <div className="fav-btns">
+                <button
+                    type="button"
+                    onClick={(e) =>
+                        setNewAttraction((attraction) => ({ ...attraction, newLike: true }))
+                    }
+                >
+                    YES
+                </button>
+                <button
+                    type="button"
+                    onClick={(e) =>
+                        setNewAttraction((attraction) => ({ ...attraction, newLike: false }))
+                    }
+                >
+                    NO
+                </button>
+            </div>
+        </>
+    );
+};
+const NewCreateBtn = function ({ setAttractions, newAttraction }) {
+    return (
+        <button
+            type="button"
+            onClick={() => setAttractions((attractions) => [...attractions, newAttraction])}
+        >
+            登録
+        </button>
     );
 };
 export default AddModal;

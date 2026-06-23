@@ -3,6 +3,7 @@ import { useState } from "react";
 import SearchBox from "./SearchBox.jsx";
 import AttractionsBox from "./AttractionsBox.jsx";
 import AttractionModal from "./AttractionModal.jsx";
+import AddModal from "./AddModal.jsx";
 
 const attractionsArr = [
     {
@@ -153,6 +154,28 @@ const attractionsArr = [
     },
 ];
 
+const areas = {
+    "Tokyo Disney Land": [
+        "World Bazaar",
+        "Adventureland",
+        "Westernland",
+        "Critter Country",
+        "Fantasyland",
+        "Toontown",
+        "Tomorrowland",
+    ],
+    "Tokyo Disney Sea": [
+        "Mediterranean Harbor",
+        "American Waterfront",
+        "Port Discovery",
+        "Lost River Delta",
+        "Fantasy Springs",
+        "Arabian Coast",
+        "Mermaid Lagoon",
+        "Mysterious Island",
+    ],
+};
+
 function App() {
     const [attractions, setAttractions] = useState(attractionsArr);
     const [park, setPark] = useState("All");
@@ -160,6 +183,7 @@ function App() {
     const [displayMode, setDisplayMode] = useState("grid");
     const [attractionId, setAttractionId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [openAddModal, setOpenAddModal] = useState(false);
     const choiceAttraction = attractionsArr.find((attraction) => attraction.id === attractionId);
     const handleDelete = function (id) {
         const valid = window.confirm("本当に削除しますか？");
@@ -193,6 +217,7 @@ function App() {
                 attractions={attractions}
                 onHandleDelete={handleDelete}
                 onHandleLike={handleLike}
+                setOpenAddModal={setOpenAddModal}
             />
             {isModalOpen && choiceAttraction && (
                 <AttractionModal
@@ -200,8 +225,10 @@ function App() {
                     setAttractions={setAttractions}
                     onHandleDelete={handleDelete}
                     onHandleLike={handleLike}
+                    areas={areas}
                 />
             )}
+            {openAddModal && <AddModal areas={areas} setAttractions={setAttractions} />}
         </div>
     );
 }
