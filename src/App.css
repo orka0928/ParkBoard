@@ -8,11 +8,18 @@
 body {
     padding: 0.5rem;
 }
+
 .App {
     display: grid;
     grid-template-rows: max-content 1fr;
     row-gap: 5rem;
 }
+.btn-flex {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
 .search-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -44,8 +51,6 @@ body {
     gap: 1.4rem;
 }
 .toggle-park {
-    display: flex;
-    align-items: center;
     gap: 0.6rem;
     background-color: rgba(212, 212, 212, 0.103);
     border-radius: 1rem;
@@ -79,7 +84,10 @@ body {
 }
 
 .main {
+    display: grid;
     padding: 0 3rem 0 3rem;
+    grid-template-rows: min-content, 1fr;
+    row-gap: 2rem;
 }
 .btn-like {
     background: none;
@@ -97,6 +105,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+
     gap: 1rem;
 }
 .attraction-grid {
@@ -159,4 +168,39 @@ body {
 
 .attraction-details {
     margin: 1rem 1rem 0 1rem;
+}
+.btn-add {
+    justify-self: flex-end;
+    display: inline-block;
+    width: 5rem;
+    height: 3rem;
+}
+
+.add-modal {
+    position: fixed;
+    width: 45rem;
+    height: 50rem;
+    border-radius: 3rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: #fff;
+    overflow: hidden;
+    border: 1px black solid;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    padding: 2rem;
+}
+.new-like-btn {
+    display: inline-block;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 1rem;
+}
+.new-like-btn-true {
+    background-color: #ffc078;
+}
+.new-like-btn-false {
+    background-color: #74c0fc;
 }
