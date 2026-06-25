@@ -2,49 +2,80 @@ import { useState } from "react";
 
 const SearchBox = function ({ setPark, setDisplayMode, setSearchWord }) {
     return (
-        <div className="search-box">
+        <header className="search-box">
             <SearchBar setSearchWord={setSearchWord} />
-            <TogglePark setPark={setPark} />
-            <ToggleDisplay setDisplayMode={setDisplayMode} />
-            <FilterBar />
-        </div>
+            <div className="filters">
+                <TogglePark setPark={setPark} />
+                <ToggleDisplay setDisplayMode={setDisplayMode} />
+                <FilterBar />
+            </div>
+        </header>
     );
 };
 const SearchBar = function ({ setSearchWord }) {
     const [word, setWord] = useState("");
 
     return (
-        <>
-            <input type="search" onChange={(e) => setWord(e.target.value)}></input>
+        <div className="search">
+            <input
+                type="search"
+                className="search-input"
+                onChange={(e) => setWord(e.target.value)}
+            ></input>
             <button type="submit" onClick={() => setSearchWord(word)}>
                 検索
             </button>
-        </>
+        </div>
     );
 };
 const TogglePark = function ({ setPark }) {
     return (
-        <>
-            <button type="button" value="Land" onClick={() => setPark("Land")}>
+        <div className="btn-flex toggle-park ">
+            <button
+                type="button"
+                value="Land"
+                className="btn-land btn-base"
+                onClick={() => setPark("Land")}
+            >
                 Land
             </button>
-            <button type="button" value="Sea" onClick={() => setPark("Sea")}>
+            <button
+                type="button"
+                value="Sea"
+                className="btn-sea btn-base"
+                onClick={() => setPark("Sea")}
+            >
                 Sea
             </button>
-            <button type="button" value="All" onClick={() => setPark("All")}>
+            <button
+                type="button"
+                value="All"
+                className="btn-all btn-base"
+                onClick={() => setPark("All")}
+            >
                 All
             </button>
-        </>
+        </div>
     );
 };
 const ToggleDisplay = function ({ setDisplayMode }) {
     return (
         <>
-            <button type="button" value="grid" onClick={() => setDisplayMode("grid")}>
-                <img src="/img/grid.png" alt="grid-img" />
+            <button
+                type="button"
+                value="grid"
+                className="btn-grid"
+                onClick={() => setDisplayMode("grid")}
+            >
+                <img src="/img/grid.png" alt="grid-img" className="grid-icon" />
             </button>
-            <button type="button" value="row" onClick={() => setDisplayMode("row")}>
-                <img src="/img/line.png" alt="line-img" />
+            <button
+                type="button"
+                value="row"
+                className="btn-row "
+                onClick={() => setDisplayMode("row")}
+            >
+                <img src="/img/line.png" alt="line-img" className="row-icon " />
             </button>
         </>
     );

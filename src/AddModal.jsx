@@ -1,5 +1,6 @@
 import { useState } from "react";
-const AddModal = function ({ areas, setAttractions }) {
+import { FlexBtns, ModalCloseBtn } from "./ReusableComponents";
+const AddModal = function ({ areas, setAttractions, setOpenAddModal }) {
     const [newAttraction, setNewAttraction] = useState({
         id: 1,
 
@@ -13,40 +14,48 @@ const AddModal = function ({ areas, setAttractions }) {
     });
 
     return (
-        <div className="add-modal">
-            <NewAttractionIMG />
-            <NewAttractionInput
-                value={"name"}
-                label={"アトラクション名"}
-                objKey={"name"}
-                setNewAttraction={setNewAttraction}
-            />
-            <NewAttractionPark setNewAttraction={setNewAttraction} />
-            <NewAttractionArea
-                newAttraction={newAttraction}
-                setNewAttraction={setNewAttraction}
-                areas={areas}
-            />
-            <NewAttractionInput
-                value={"type"}
-                label={"アトラクション種類"}
-                objKey={"type"}
-                setNewAttraction={setNewAttraction}
-            />
-            <NewAttractionDescription
-                newAttraction={newAttraction}
-                setNewAttraction={setNewAttraction}
-                areas={areas}
-            />
-            <NewAttractionInput
-                value={"review"}
-                label={"感想"}
-                objKey={"review"}
-                setNewAttraction={setNewAttraction}
-            />
-            <NewAttractionFavBtns setNewAttraction={setNewAttraction} />
-            <NewCreateBtn newAttraction={newAttraction} setAttractions={setAttractions} />
-        </div>
+        <>
+            <div className="add-modal modal">
+                <NewAttractionIMG />
+                <NewAttractionInput
+                    value={"name"}
+                    label={"アトラクション名"}
+                    objKey={"name"}
+                    setNewAttraction={setNewAttraction}
+                />
+                <NewAttractionPark setNewAttraction={setNewAttraction} />
+                <NewAttractionArea
+                    newAttraction={newAttraction}
+                    setNewAttraction={setNewAttraction}
+                    areas={areas}
+                />
+                <NewAttractionInput
+                    value={"type"}
+                    label={"アトラクション種類"}
+                    objKey={"type"}
+                    setNewAttraction={setNewAttraction}
+                />
+                <NewAttractionDescription
+                    newAttraction={newAttraction}
+                    setNewAttraction={setNewAttraction}
+                    areas={areas}
+                />
+                <NewAttractionInput
+                    value={"review"}
+                    label={"感想"}
+                    objKey={"review"}
+                    setNewAttraction={setNewAttraction}
+                />
+                <NewAttractionFavBtns
+                    setNewAttraction={setNewAttraction}
+                    newAttraction={newAttraction}
+                />
+                <FlexBtns cl={"create-close-btns"}>
+                    <NewCreateBtn setAttractions={setAttractions} newAttraction={newAttraction} />
+                    <ModalCloseBtn closeModal={setOpenAddModal} />
+                </FlexBtns>
+            </div>
+        </>
     );
 };
 
@@ -129,27 +138,26 @@ const NewAttractionDescription = function ({ setNewAttraction }) {
         </>
     );
 };
-const NewAttractionFavBtns = function ({ setNewAttraction }) {
-    const [registerLike, setRegisterLike] = useState(false);
-    const handleRegisterLike = function (boolean) {
-        setRegisterLike(boolean);
-        setNewAttraction((attraction) => ({ ...attraction, like: boolean }));
-    };
+const NewAttractionFavBtns = function ({ newAttraction, setNewAttraction }) {
     return (
         <>
             <label>お気に入り登録しますか？</label>
-            <div className="fav-btns">
+            <div className="btn-flex new-like-btns">
                 <button
                     type="button"
-                    className={`new-like-btn ${registerLike ? "new-like-btn-true" : ""}`}
-                    onClick={() => handleRegisterLike(true)}
+                    className={`btn-base ${newAttraction.like ? "new-like-btn-true" : ""}`}
+                    onClick={() =>
+                        setNewAttraction((attraction) => ({ ...attraction, like: true }))
+                    }
                 >
                     YES
                 </button>
                 <button
                     type="button"
-                    className={`new-like-btn ${!registerLike ? "new-like-btn-false" : ""}`}
-                    onClick={() => handleRegisterLike(false)}
+                    className={`btn-base ${!newAttraction.like ? "new-like-btn-false" : ""}`}
+                    onClick={() =>
+                        setNewAttraction((attraction) => ({ ...attraction, like: false }))
+                    }
                 >
                     NO
                 </button>
@@ -157,14 +165,17 @@ const NewAttractionFavBtns = function ({ setNewAttraction }) {
         </>
     );
 };
+
 const NewCreateBtn = function ({ setAttractions, newAttraction }) {
     return (
         <button
             type="button"
+            className="btn-base"
             onClick={() => setAttractions((attractions) => [...attractions, newAttraction])}
         >
             登録
         </button>
     );
 };
+
 export default AddModal;

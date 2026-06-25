@@ -19,13 +19,31 @@ body {
     align-items: center;
     gap: 2rem;
 }
+.modal {
+    position: fixed;
+    width: 45rem;
+    height: 50rem;
+    border-radius: 3rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    background-color: #fff;
+    overflow: hidden;
+    border: 1px black solid;
+}
+.btn-base {
+    display: inline-block;
+    width: 5rem;
+    height: 3rem;
+    border-radius: 1rem;
+}
 
 .search-box {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     padding-top: 2rem;
-    /* box-shadow: 0 4px 0 #fff4e6; */
     background-color: rgba(255 244 230/ 0.5);
     border-radius: 2rem;
 }
@@ -55,7 +73,8 @@ body {
     background-color: rgba(212, 212, 212, 0.103);
     border-radius: 1rem;
 }
-.toggle-park button {
+.toggle-park > .btn-base {
+    width: initial;
     padding: 1rem 2rem;
     border-radius: 1rem;
     transition:
@@ -86,7 +105,7 @@ body {
 .main {
     display: grid;
     padding: 0 3rem 0 3rem;
-    grid-template-rows: min-content, 1fr;
+    grid-template-rows: min-content 1fr;
     row-gap: 2rem;
 }
 .btn-like {
@@ -105,15 +124,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
     gap: 1rem;
 }
 .attraction-grid {
     min-width: 24rem;
     max-width: 24rem;
-    /* min-height: auto; */
     line-height: 2rem;
-    /* border: 1px black solid; */
+
     box-shadow: 0 0.6px 2px #ced4da;
     border-radius: 2rem;
     overflow: hidden;
@@ -128,7 +145,6 @@ body {
 .attraction-row {
     display: grid;
     grid-template-columns: 30rem 1fr;
-    /* grid-template-rows: auto; */
     gap: 2rem;
     overflow: hidden;
     box-shadow: 0 0.6px 2px #ced4da;
@@ -152,20 +168,6 @@ body {
     grid-column: 2;
 }
 
-.attraction-modal {
-    position: fixed;
-    width: 45rem;
-    height: 50rem;
-    border-radius: 3rem;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    background-color: #fff;
-    overflow: hidden;
-    border: 1px black solid;
-}
-
 .attraction-details {
     margin: 1rem 1rem 0 1rem;
 }
@@ -177,30 +179,24 @@ body {
 }
 
 .add-modal {
-    position: fixed;
-    width: 45rem;
-    height: 50rem;
-    border-radius: 3rem;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    background-color: #fff;
-    overflow: hidden;
-    border: 1px black solid;
     display: grid;
     grid-template-columns: 30% 70%;
+    align-items: center;
     padding: 2rem;
 }
-.new-like-btn {
-    display: inline-block;
-    width: 5rem;
-    height: 3rem;
-    border-radius: 1rem;
+.new-like-btns {
+    min-width: 100%;
+    justify-content: space-evenly;
 }
+
 .new-like-btn-true {
     background-color: #ffc078;
 }
 .new-like-btn-false {
     background-color: #74c0fc;
+}
+.create-close-btns {
+    justify-content: space-evenly;
+    grid-column: 2/3;
+    justify-self: flex-end;
 }

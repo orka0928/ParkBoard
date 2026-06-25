@@ -3,7 +3,7 @@ export const FlexBtns = function ({ children, cl = "" }) {
 };
 export const ModalCloseBtn = function ({ closeModal }) {
     return (
-        <button type="button" onClick={() => closeModal(false)}>
+        <button type="button" className="btn-base" onClick={() => closeModal(false)}>
             閉じる
         </button>
     );
