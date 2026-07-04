@@ -176,7 +176,7 @@ const areas = {
     ],
 };
 
-function App() {
+const App = function () {
     const [attractions, setAttractions] = useState(attractionsArr);
     const [park, setPark] = useState("All");
     const [searchWord, setSearchWord] = useState("");
@@ -184,7 +184,9 @@ function App() {
     const [attractionId, setAttractionId] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openAddModal, setOpenAddModal] = useState(false);
+
     const choiceAttraction = attractionsArr.find((attraction) => attraction.id === attractionId);
+
     const handleDelete = function (id) {
         const valid = window.confirm("本当に削除しますか？");
         if (!valid) return;
@@ -226,11 +228,18 @@ function App() {
                     onHandleDelete={handleDelete}
                     onHandleLike={handleLike}
                     areas={areas}
+                    setIsModalOpen={setIsModalOpen}
                 />
             )}
-            {openAddModal && <AddModal areas={areas} setAttractions={setAttractions} />}
+            {openAddModal && (
+                <AddModal
+                    areas={areas}
+                    setAttractions={setAttractions}
+                    setOpenAddModal={setOpenAddModal}
+                />
+            )}
         </div>
     );
-}
+};
 
 export default App;

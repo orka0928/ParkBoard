@@ -8,6 +8,7 @@ const AttractionsBox = function ({
     setAttractionId,
     setIsModalOpen,
     setAttractions,
+    setOpenAddModal,
     onHandleDelete,
 }) {
     let _attractions;
@@ -29,19 +30,24 @@ const AttractionsBox = function ({
     };
 
     return (
-        <main className={`main attractions-${displayMode}`}>
-            {_attractions.map((attraction) => (
-                <AttractionCard
-                    attraction={attraction}
-                    key={attraction.id}
-                    displayMode={displayMode}
-                    onHandleLike={handleLike}
-                    setAttractionId={setAttractionId}
-                    setIsModalOpen={setIsModalOpen}
-                    setAttractions={setAttractions}
-                    onHandleDelete={onHandleDelete}
-                />
-            ))}
+        <main className={`main`}>
+            <button className="btn-add btn-base" onClick={() => setOpenAddModal(true)}>
+                追加
+            </button>
+            <div className={`attractions-${displayMode}`}>
+                {_attractions.map((attraction) => (
+                    <AttractionCard
+                        attraction={attraction}
+                        key={attraction.id}
+                        displayMode={displayMode}
+                        onHandleLike={handleLike}
+                        setAttractionId={setAttractionId}
+                        setIsModalOpen={setIsModalOpen}
+                        setAttractions={setAttractions}
+                        onHandleDelete={onHandleDelete}
+                    />
+                ))}
+            </div>
         </main>
     );
 };
