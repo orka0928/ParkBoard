@@ -8,7 +8,8 @@ import AddModal from "./AddModal.jsx";
 const attractionsArr = [
     {
         id: 1,
-        img: "/img/center_of_the_earth.svg",
+        // img: `/img/center_of_the_earth.svg`,
+        img: `${process.env.PUBLIC_URL}/img/center_of_the_earth.svg`,
         name: "Journey to the Center of the Earth",
         type: "Roller Coaster",
         park: "Tokyo Disney Sea",
@@ -20,7 +21,7 @@ const attractionsArr = [
     },
     {
         id: 2,
-        img: "/img/tower_of_terror.svg",
+        img: `${process.env.PUBLIC_URL}/img/tower_of_terror.svg`,
         name: "Tower of Terror",
         type: "Free Fall",
         park: "Tokyo Disney Sea",
@@ -33,7 +34,7 @@ const attractionsArr = [
 
     {
         id: 3,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -44,7 +45,7 @@ const attractionsArr = [
     },
     {
         id: 4,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -55,7 +56,7 @@ const attractionsArr = [
     },
     {
         id: 5,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -66,7 +67,7 @@ const attractionsArr = [
     },
     {
         id: 6,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -77,7 +78,7 @@ const attractionsArr = [
     },
     {
         id: 7,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -88,7 +89,7 @@ const attractionsArr = [
     },
     {
         id: 8,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -99,7 +100,7 @@ const attractionsArr = [
     },
     {
         id: 9,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -110,7 +111,7 @@ const attractionsArr = [
     },
     {
         id: 10,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -121,7 +122,7 @@ const attractionsArr = [
     },
     {
         id: 11,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -132,7 +133,7 @@ const attractionsArr = [
     },
     {
         id: 12,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -143,7 +144,7 @@ const attractionsArr = [
     },
     {
         id: 13,
-        img: "/img/western_river_railroad.svg",
+        img: `${process.env.PUBLIC_URL}/img/western_river_railroad.svg`,
         name: "Western River Railroad",
         type: "Ride/Transportation",
         park: "Tokyo Disney Land",
@@ -185,7 +186,7 @@ const App = function () {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [openAddModal, setOpenAddModal] = useState(false);
 
-    const choiceAttraction = attractionsArr.find((attraction) => attraction.id === attractionId);
+    const choiceAttraction = attractions.find((attraction) => attraction.id === attractionId);
 
     const handleDelete = function (id) {
         const valid = window.confirm("本当に削除しますか？");
