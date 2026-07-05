@@ -67,7 +67,11 @@ const ToggleDisplay = function ({ setDisplayMode }) {
                 className="btn-grid"
                 onClick={() => setDisplayMode("grid")}
             >
-                <img src="/img/grid.png" alt="grid-img" className="grid-icon" />
+                <img
+                    src={`${process.env.PUBLIC_URL}/img/grid.png`}
+                    alt="grid-img"
+                    className="grid-icon"
+                />
             </button>
             <button
                 type="button"
@@ -75,7 +79,11 @@ const ToggleDisplay = function ({ setDisplayMode }) {
                 className="btn-row "
                 onClick={() => setDisplayMode("row")}
             >
-                <img src="/img/line.png" alt="line-img" className="row-icon " />
+                <img
+                    src={`${process.env.PUBLIC_URL}/img/line.png`}
+                    alt="line-img"
+                    className="row-icon "
+                />
             </button>
         </>
     );
