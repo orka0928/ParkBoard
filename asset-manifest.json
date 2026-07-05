@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ParkBoard/static/css/main.74c34eea.css",
-    "main.js": "/ParkBoard/static/js/main.5df7798e.js",
+    "main.js": "/ParkBoard/static/js/main.50761827.js",
     "index.html": "/ParkBoard/index.html",
     "main.74c34eea.css.map": "/ParkBoard/static/css/main.74c34eea.css.map",
-    "main.5df7798e.js.map": "/ParkBoard/static/js/main.5df7798e.js.map"
+    "main.50761827.js.map": "/ParkBoard/static/js/main.50761827.js.map"
   },
   "entrypoints": [
     "static/css/main.74c34eea.css",
-    "static/js/main.5df7798e.js"
+    "static/js/main.50761827.js"
   ]
 }
